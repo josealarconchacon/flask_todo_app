@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -18,6 +18,17 @@ def __repr__ (self):
     return f'<Todo {self.id} {self.description}>'
 
 db.create_all()
+
+# Create
+@app.route('/todos/create', methods=['POST'])
+def create_todo():
+    # create new todo obj
+    description = request.form.get('description', '')
+    todo = Todo(description=description)
+    db.session.add(todo)
+    db.session.commit()
+    return redirect(url_for('index'))
+
 
 @app.route('/')
 def index():
