@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import sys
 
 app = Flask(__name__)
@@ -7,6 +8,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://josealarconchacon@localhost:5432/flask_todo_app'
 # link SQLAlchemy to Flask app
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class Todo(db.Model):
