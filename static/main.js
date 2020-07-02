@@ -1,3 +1,15 @@
+// delete
+const deleteBtns = document.querySelectorAll('.delete-button');
+  for (let i = 0; i < deleteBtns.length; i++) {
+    const btn = deleteBtns[i];
+    btn.onclick = function(e) {
+      const todoId = e.target.dataset['id'];
+      fetch('/todos/' + todoId, {
+        method: 'DELETE'
+      });
+    }
+  }
+
 // lopp over the checkbox
 const checkboxs = document.querySelectorAll('.check-completed');
 for (let i = 0; i < checkboxs.length; i++) {
