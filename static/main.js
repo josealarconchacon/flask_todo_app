@@ -3,8 +3,8 @@ const checkboxs = document.querySelectorAll('.check-completed');
 for (let i = 0; i < checkboxs.length; i++) {
     const checkbox = checkboxs[i];
     checkbox.onchange = function(e) {
-        console.log('event', e);
         const newCompleted = e.target.checked;
+        const todoId = e.target.dataset['id'];
         fetch('/todos/' + todoId + 'set-completed', {
             method: 'POST',
             body: JSON.stringify({
