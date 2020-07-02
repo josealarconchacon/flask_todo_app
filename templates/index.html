@@ -23,7 +23,7 @@
 
         <ul id="todos">
             {% for item in data %}
-            <li><input type="checkbox" {% if item.completed %} checked {% endif %} /> {{ item.description }}</li>
+            <li><input class="check-completed" data-id="{{ item.id }}" type="checkbox" {% if item.completed %} checked {% endif %} /> {{ item.description }}</li>
             {% endfor %}
         </ul>
 

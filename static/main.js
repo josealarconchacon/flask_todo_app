@@ -5,7 +5,7 @@ for (let i = 0; i < checkboxs.length; i++) {
     checkbox.onchange = function(e) {
         console.log('event', e);
         const newCompleted = e.target.checked;
-        fetch('/todos/set-completed', {
+        fetch('/todos/' + todoId + 'set-completed', {
             method: 'POST',
             body: JSON.stringify({
                 'completed': newCompleted
