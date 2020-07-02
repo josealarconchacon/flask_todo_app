@@ -14,6 +14,12 @@ for (let i = 0; i < checkboxs.length; i++) {
                 'Content-Type': 'application/json'  
             }
         })
+        .then(function() {
+            document.getElementById('error').className = 'hidden';
+        })
+        .catch(function() {
+            document.getElementById('error').className = '';
+        })
     }
 }
 
