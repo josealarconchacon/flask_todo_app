@@ -10,6 +10,19 @@
                 list-style: none;
                 padding: 0;
                 margin: 0;
+                width: 300px;
+            }
+            li {
+                clear: both;
+            }
+            li button {
+                -webkit-appearance: none;
+                border: none;
+                outline: none;
+                color: red;
+                float: right;
+                cursor: pointer;
+                font-size: 20px;
             }
         </style>
     </head>
@@ -23,7 +36,11 @@
 
         <ul id="todos">
             {% for item in data %}
-            <li><input class="check-completed" data-id="{{ item.id }}" type="checkbox" {% if item.completed %} checked {% endif %} /> {{ item.description }}</li>
+            <li>
+                <input class="check-completed" data-id="{{ item.id }}" type="checkbox" {% if item.completed %} checked {% endif %} /> 
+                {{ item.description }}
+                <button class="delete-button" data-id="{{ todo.id }}">&cross;</button>
+            </li>
             {% endfor %}
         </ul>
 
