@@ -1,3 +1,22 @@
+// lopp over the checkbox
+const checkboxs = document.querySelectorAll('.check-completed');
+for (let i = 0; i < checkboxs.length; i++) {
+    const checkbox = checkboxs[i];
+    checkbox.onchange = function(e) {
+        console.log('event', e);
+        const newCompleted = e.target.checked;
+        fetch('/todos/set-completed', {
+            method: 'POST',
+            body: JSON.stringify({
+                'completed': newCompleted
+            }),
+            headers: {
+                'Content-Type': 'application/json'  
+            }
+        })
+    }
+}
+
 document.getElementById('form').onsubmit = function(e) {
     e.preventDefault();
     fetch('/todos/create', {
