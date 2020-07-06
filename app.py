@@ -16,10 +16,19 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(), nullable=False)
     completed = db.Column(db.Boolean, nullable=False, default=False)
+    # foreign key 
+    list_id = db.Column(db.Integer, db.ForeignKey('todoLists.id'), nullable=False)
 
 # debugging statements, define dander-repr method
 def __repr__ (self):
     return f'<Todo {self.id} {self.description}>'
+
+class TodoList(db.Model):
+    __tablename__ = "todoLists"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(), nullable=False)
+    # specify the relationship
+    todos = db.relationship('Todo', backref='list', lazy=True)
 
 # Create
 @app.route('/todos/create', methods=['POST'])
