@@ -24,25 +24,44 @@
                 cursor: pointer;
                 font-size: 20px;
             }
+            .lists-wrapper, .todos-wrapper {
+                display: inline-block;
+                vertical-align: top;
+            }
         </style>
     </head>
     <body>
-        <form id="form">
-            <input type="text" id="description" name="description" />
-            <input type="submit" value="Create" />
-        </form>
+        <div class="lists-wrapper">
+            <ul id="lists">
+                {% for list in lists %}
+                    <li>
+                        <a href="/lists/{{ list.id }}">
+                            {{ list.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
 
-        <div id="error" class="hidden">Somethig went wrong!</div>
-
-        <ul id="todos">
-            {% for item in data %}
-            <li>
-                <input class="check-completed" data-id="{{ item.id }}" type="checkbox" {% if item.completed %} checked {% endif %} /> 
-                {{ item.description }}
-                <button class="delete-button" data-id="{{ item.id }}">&cross;</button>
-            </li>
-            {% endfor %}
-        </ul>
+        <div class="todos-wrapper">
+            <h4>{{ active_list.name }}</h4>
+            <form id="form">
+                <input type="text" id="description" name="description" />
+                <input type="submit" value="Create" />
+            </form>
+    
+            <div id="error" class="hidden">Somethig went wrong!</div>
+    
+            <ul id="todos">
+                {% for todo in todos %}
+                <li>
+                    <input class="check-completed" data-id="{{ todo.id }}" type="checkbox" {% if todo.completed %} checked {% endif %} /> 
+                    {{ todo.description }}
+                    <button class="delete-button" data-id="{{ todo.id }}">&cross;</button>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
 
     <script type="text/javascript" src="{{ url_for('static', filename = 'main.js') }}""></script>
     </body>
